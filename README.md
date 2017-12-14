@@ -18,9 +18,11 @@ traefik_dir: /etc/traefik
 traefik_network: traefik
 traefik_user: root
 traefik_volumes: []
+traefik_enable_web: false
 
-acme_email: "me@google.com"
-acme_domains:
+traefik_acme_email: "me@google.com"
+traefik_acme_on_demand: false
+traefik_acme_domains:
   - domain: mydomain.com
     sans:
       - www.mydomain.com
@@ -32,7 +34,7 @@ acme_domains:
 ---
 - hosts: webservers
   roles:
-    - opichon.docker-traefik
+    - sfl.docker-traefik
       traefik_certificates:
       -
       	{
@@ -48,4 +50,3 @@ acme_domains:
 ## License
 
 MIT
-

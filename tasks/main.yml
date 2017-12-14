@@ -26,7 +26,7 @@
     driver: bridge
     name: "{{ traefik_network }}"
 
-- name: Run traefik proxy
+- name: Run traefik proxy (w/ web interface)
   docker_container:
     labels:
       traefik.backend: traefik
@@ -45,3 +45,20 @@
     restart_policy: always
     state: "{{ traefik_state }}"
     volumes: '[ "/var/run/docker.sock:/var/run/docker.sock", "{{ traefik_dir }}/traefik.toml:/etc/traefik/traefik.toml", "{{ traefik_dir }}/acme.json:/etc/traefik/acme.json" ] + {{ traefik_volumes }}'
+  when: traefik_enable_web
+
+- name: Run traefik proxy (w/o web interface)
+  docker_container:
+    image: traefik:latest
+    name: traefik
+    networks:
+      - name: "{{ traefik_network }}"
+    pull: true
+    ports:
+      - "443:443"
+      - "80:80"
+    recreate: true
+    restart_policy: always
+    state: "{{ traefik_state }}"
+    volumes: '[ "/var/run/docker.sock:/var/run/docker.sock", "{{ traefik_dir }}/traefik.toml:/etc/traefik/traefik.toml", "{{ traefik_dir }}/acme.json:/etc/traefik/acme.json" ] + {{ traefik_volumes }}'
+  when: not traefik_enable_web

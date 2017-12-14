@@ -7,3 +7,5 @@ traefik_network: traefik
 traefik_state: started
 traefik_user: www-data
 traefik_volumes: []
+traefik_enable_web: false
+traefik_acme_on_demand: false

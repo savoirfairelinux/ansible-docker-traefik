@@ -21,12 +21,12 @@ KeyFile = "{{ cert.KeyFile }}"
 exposedbydefault = false
 
 [acme]
-email = "{{ acme_email }}"
-storageFile = "/etc/traefik/acme.json"
-entryPoint =  "https"
-onDemand = true
+email = "{{ traefik_acme_email }}"
+storageFile = "{{ traefik_dir }}/acme.json"
+entryPoint = "https"
+onDemand = {{ traefik_acme_on_demand }}
 
-{% for domain in acme_domains %}
+{% for domain in traefik_acme_domains %}
 [[acme.domains]]
 main = "{{ domain.domain }}"
 {% if domain.sans is defined and domain.sans | length %}
@@ -34,12 +34,13 @@ sans = [{% for san in domain.sans %}"{{ san }}"{% if not loop.last %}, {% endif 
 {% endif %}
 {% endfor %}
 
-
+{% if traefik_enable_web %}
 [web]
 address = ":8080"
 
 [web.auth.basic]
 users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/", "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"]
+{% endif %}
 
 [docker]
 domain = "{{ traefik_docker_domain }}"
