@@ -23,7 +23,7 @@
 
 - name: Create network
   docker_network:
-    driver: bridge
+    driver: "{{ traefik_network_driver }}"
     name: "{{ traefik_network }}"
 
 - name: Run traefik proxy (w/ web interface)

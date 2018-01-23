@@ -4,6 +4,7 @@ traefik_dir: /etc/traefik
 traefik_group: www-data
 traefik_log_level: ERROR
 traefik_network: traefik
+traefik_network_driver: bridge
 traefik_state: started
 traefik_user: www-data
 traefik_volumes: []
