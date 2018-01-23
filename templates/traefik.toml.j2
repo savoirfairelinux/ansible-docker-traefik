@@ -24,7 +24,7 @@ exposedbydefault = false
 email = "{{ traefik_acme_email }}"
 storageFile = "{{ traefik_dir }}/acme.json"
 entryPoint = "https"
-onDemand = {{ traefik_acme_on_demand }}
+onDemand = {{ traefik_acme_on_demand | bool | lower }}
 
 {% for domain in traefik_acme_domains %}
 [[acme.domains]]
