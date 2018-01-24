@@ -21,10 +21,19 @@
     mode: 0600
     src: files/acme.json
 
-- name: Create network
+- name: Create network (basic)
   docker_network:
     driver: "{{ traefik_network_driver }}"
     name: "{{ traefik_network }}"
+  when: not traefik_network_attachable
+
+# Use a command here to create an attachable container, until Ansible
+# updates their docker_network module to permit it.
+- name: Create network (advanced)
+  command: "docker network create --driver {{ traefik_network_driver }} --attachable {{ traefik_network }}"
+  args:
+    warn: no
+  when: traefik_network_attachable
 
 - name: Run traefik proxy (w/ web interface)
   docker_container:

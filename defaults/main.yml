@@ -5,6 +5,7 @@ traefik_group: www-data
 traefik_log_level: ERROR
 traefik_network: traefik
 traefik_network_driver: bridge
+traefik_network_attachable: false
 traefik_state: started
 traefik_user: www-data
 traefik_volumes: []
