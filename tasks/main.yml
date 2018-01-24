@@ -33,6 +33,8 @@
   command: "docker network create --driver {{ traefik_network_driver }} --attachable {{ traefik_network }}"
   args:
     warn: no
+  register: command_result
+  failed_when: "'network with name public already exists' not in command_result.stderr"
   when: traefik_network_attachable
 
 - name: Run traefik proxy (w/ web interface)
