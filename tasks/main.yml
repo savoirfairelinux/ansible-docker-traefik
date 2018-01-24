@@ -25,6 +25,7 @@
   docker_network:
     driver: "{{ traefik_network_driver }}"
     name: "{{ traefik_network }}"
+    attachable: true
 
 - name: Run traefik proxy (w/ web interface)
   docker_container:
