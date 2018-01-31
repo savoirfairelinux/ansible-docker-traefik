@@ -13,3 +13,6 @@ traefik_enable_web: false
 traefik_https_redirect: true
 traefik_acme_on_demand: false
 traefik_acme_domains: []
+traefik_acme_challenge: 'tls'
+traefik_acme_dns_provider: ''
+traefik_acme_dns_delay: 0

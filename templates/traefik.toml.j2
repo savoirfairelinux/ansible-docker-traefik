@@ -28,6 +28,15 @@ storageFile = "{{ traefik_dir }}/acme.json"
 entryPoint = "https"
 onDemand = {{ traefik_acme_on_demand | bool | lower }}
 
+{% if traefik_acme_challenge == 'http' %}
+[acme.httpChallenge]
+entryPoint = "http"
+{% elif traefik_acme_challenge == 'dns' %}
+[acme.dnsChallenge]
+provider = "{{ traefik_acme_dns_provider }}"
+delayBeforeCheck = {{ traefik_acme_dns_delay | default(0) }}
+{% endif %}
+
 {% for domain in traefik_acme_domains %}
 [[acme.domains]]
 main = "{{ domain.domain }}"
