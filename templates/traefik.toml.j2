@@ -57,3 +57,6 @@ users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/", "test2:$apr1$d9hr9HBB$4Hx
 domain = "{{ traefik_docker_domain }}"
 endpoint = "unix:///var/run/docker.sock"
 watch = true
+{% if traefik_docker_swarm %}
+swarmmode = true
+{% endif %}

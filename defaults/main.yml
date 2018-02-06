@@ -16,3 +16,4 @@ traefik_acme_domains: []
 traefik_acme_challenge: 'tls'
 traefik_acme_dns_provider: ''
 traefik_acme_dns_delay: 0
+traefik_docker_swarm: false
