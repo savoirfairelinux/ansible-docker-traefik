@@ -34,7 +34,7 @@
   args:
     warn: no
   register: command_result
-  failed_when: "'network with name public already exists' not in command_result.stderr"
+  failed_when: "command_result.stderr and 'network with name public already exists' not in command_result.stderr"
   when: traefik_network_attachable
 
 - name: Run traefik proxy (w/ web interface)
